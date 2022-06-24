@@ -7,10 +7,12 @@ using UnityEngine;
  */
 public class PlayerLookManager : MonoBehaviour
 {
+    #region VARIABLES
     [SerializeField] private Camera cam;
     private float upRotation = 0f;
-    private readonly float xSensitivity = 30f;
-    private readonly float ySensitivity = 30f;
+    private readonly float xSensitivity = 40f;
+    private readonly float ySensitivity = 40f;
+    #endregion
 
     public void Look(Vector2 input)
     {
