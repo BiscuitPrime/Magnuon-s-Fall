@@ -23,6 +23,8 @@ public class InputManager : MonoBehaviour
         playerMovementManager = GetComponent<PlayerMovementManager>();
         onFootActions.Jump.performed += ctx => playerMovementManager.Jump(); //everytime the jump input is performed, we call the jump() function throught a callback context
         playerLookManager = GetComponent<PlayerLookManager>();
+        onFootActions.Running.started += ctx => playerMovementManager.Run(true);
+        onFootActions.Running.canceled += ctx => playerMovementManager.Run(false);
     }
 
     // FIXEDUPDATE FOR PHYSICS MOVEMENTS

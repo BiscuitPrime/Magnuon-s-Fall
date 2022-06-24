@@ -9,7 +9,9 @@ public class PlayerMovementManager : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 velocity;
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float baseSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 10f;
+    private float curSpeed;
     [SerializeField] private float gravity = -9.8f; //REWORK GRAVITY INTO AN 'ACTOR' component
     private bool isGrounded;
     [SerializeField] private float jumpHeight = 3f;
@@ -17,6 +19,7 @@ public class PlayerMovementManager : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        curSpeed = baseSpeed;
     }
 
     private void Update()
@@ -30,7 +33,7 @@ public class PlayerMovementManager : MonoBehaviour
         Vector3 direction = Vector3.zero;
         direction.x = input.x;
         direction.z = input.y;
-        controller.Move(transform.TransformDirection(direction) * speed * Time.deltaTime);
+        controller.Move(transform.TransformDirection(direction) * curSpeed * Time.deltaTime);
         velocity.y += gravity * Time.deltaTime;
         if(isGrounded && velocity.y<0)
         {
@@ -44,8 +47,15 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if(isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * -0.6f * gravity);
         }
 
+    }
+
+    public void Run(bool isRunning)
+    {
+        if (isRunning) { curSpeed = sprintSpeed; }
+        else { curSpeed = baseSpeed; }
+        
     }
 }
