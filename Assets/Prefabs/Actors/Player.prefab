@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5110390642371222758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8689234771769555490}
+  m_Layer: 0
+  m_Name: GunHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8689234771769555490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110390642371222758}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.377, y: 0.148, z: 0.159}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7731075496311065506}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7731075495685223840
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +128,7 @@ GameObject:
   - component: {fileID: 48540987655591573}
   - component: {fileID: 7303769931056882884}
   - component: {fileID: 3261322664854859621}
+  - component: {fileID: 6327479756345317484}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,6 +150,7 @@ Transform:
   m_Children:
   - {fileID: 7731075496484604001}
   - {fileID: 7731075495685223845}
+  - {fileID: 8689234771769555490}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -163,7 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa958b6c7e885746b3422e95a07d42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  baseSpeed: 5
+  sprintSpeed: 10
   gravity: -9.8
   jumpHeight: 3
 --- !u!114 &3261322664854859621
@@ -178,6 +212,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9805c25ad10a95449264ef63a3d8777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 7731075495685223842}
+--- !u!114 &6327479756345317484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7731075496311065507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb3e4915dba17c4a93504c62ace75b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curGun: {fileID: 5973058275013514991, guid: dee8cf8c6e9234b45803b600519428e8, type: 3}
+  holder: {fileID: 5110390642371222758}
   cam: {fileID: 7731075495685223842}
 --- !u!1 &7731075496484604030
 GameObject:

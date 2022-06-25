@@ -62,6 +62,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FiringMain"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd69f0ac-d420-4e92-ab95-565f1bf59fc7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Running"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26296d7b-90b5-4f7f-ae93-5b4da340cc4a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FiringMain"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Jump = m_OnFoot.FindAction("Jump", throwIfNotFound: true);
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Running = m_OnFoot.FindAction("Running", throwIfNotFound: true);
+        m_OnFoot_FiringMain = m_OnFoot.FindAction("FiringMain", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Jump;
     private readonly InputAction m_OnFoot_Look;
     private readonly InputAction m_OnFoot_Running;
+    private readonly InputAction m_OnFoot_FiringMain;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -235,6 +257,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_OnFoot_Jump;
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
         public InputAction @Running => m_Wrapper.m_OnFoot_Running;
+        public InputAction @FiringMain => m_Wrapper.m_OnFoot_FiringMain;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +279,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Running.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRunning;
                 @Running.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRunning;
                 @Running.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnRunning;
+                @FiringMain.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnFiringMain;
+                @FiringMain.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnFiringMain;
+                @FiringMain.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnFiringMain;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +298,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Running.started += instance.OnRunning;
                 @Running.performed += instance.OnRunning;
                 @Running.canceled += instance.OnRunning;
+                @FiringMain.started += instance.OnFiringMain;
+                @FiringMain.performed += instance.OnFiringMain;
+                @FiringMain.canceled += instance.OnFiringMain;
             }
         }
     }
@@ -282,5 +311,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnRunning(InputAction.CallbackContext context);
+        void OnFiringMain(InputAction.CallbackContext context);
     }
 }

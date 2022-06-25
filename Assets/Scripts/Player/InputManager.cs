@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     private PlayerInput.OnFootActions onFootActions;
     private PlayerMovementManager playerMovementManager;
     private PlayerLookManager playerLookManager;
+    private GunManager gunManager;
     #endregion
 
     void Awake()
@@ -25,6 +26,8 @@ public class InputManager : MonoBehaviour
         playerLookManager = GetComponent<PlayerLookManager>();
         onFootActions.Running.started += ctx => playerMovementManager.Run(true);
         onFootActions.Running.canceled += ctx => playerMovementManager.Run(false);
+        gunManager = GetComponent<GunManager>();
+        //onFootActions.FiringMain.performed += ctx => gunManager.Fire();
     }
 
     // FIXEDUPDATE FOR PHYSICS MOVEMENTS
@@ -37,6 +40,15 @@ public class InputManager : MonoBehaviour
     private void LateUpdate()
     {
         playerLookManager.Look(onFootActions.Look.ReadValue<Vector2>());
+    }
+
+    //UPDATE FOR WEAPON/ACTIONS HANDLING
+    private void Update()
+    {
+        if(onFootActions.FiringMain.ReadValue<float>() == 1)
+        {
+            gunManager.Fire();
+        }
     }
 
 
