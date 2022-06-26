@@ -80,6 +80,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reloading"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9db6b4d-0dfb-49dd-80a8-95e9983554e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""ADS"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""655284a0-e4f0-4669-ad29-6cf9ea2a9b90"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reloading"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +226,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Running = m_OnFoot.FindAction("Running", throwIfNotFound: true);
         m_OnFoot_FiringMain = m_OnFoot.FindAction("FiringMain", throwIfNotFound: true);
         m_OnFoot_ADS = m_OnFoot.FindAction("ADS", throwIfNotFound: true);
+        m_OnFoot_Reloading = m_OnFoot.FindAction("Reloading", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,6 +292,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Running;
     private readonly InputAction m_OnFoot_FiringMain;
     private readonly InputAction m_OnFoot_ADS;
+    private readonly InputAction m_OnFoot_Reloading;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -281,6 +303,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Running => m_Wrapper.m_OnFoot_Running;
         public InputAction @FiringMain => m_Wrapper.m_OnFoot_FiringMain;
         public InputAction @ADS => m_Wrapper.m_OnFoot_ADS;
+        public InputAction @Reloading => m_Wrapper.m_OnFoot_Reloading;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -308,6 +331,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ADS.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnADS;
                 @ADS.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnADS;
                 @ADS.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnADS;
+                @Reloading.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReloading;
+                @Reloading.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReloading;
+                @Reloading.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReloading;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -330,6 +356,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ADS.started += instance.OnADS;
                 @ADS.performed += instance.OnADS;
                 @ADS.canceled += instance.OnADS;
+                @Reloading.started += instance.OnReloading;
+                @Reloading.performed += instance.OnReloading;
+                @Reloading.canceled += instance.OnReloading;
             }
         }
     }
@@ -342,5 +371,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnRunning(InputAction.CallbackContext context);
         void OnFiringMain(InputAction.CallbackContext context);
         void OnADS(InputAction.CallbackContext context);
+        void OnReloading(InputAction.CallbackContext context);
     }
 }

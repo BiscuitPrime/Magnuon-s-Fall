@@ -29,6 +29,7 @@ public class InputManager : MonoBehaviour
         gunManager = GetComponent<GunManager>();
         onFootActions.ADS.started += ctx => gunManager.AimDownSight(true);
         onFootActions.ADS.canceled += ctx => gunManager.AimDownSight(false);
+        onFootActions.Reloading.performed += ctx => gunManager.Reload();
     }
 
     // FIXEDUPDATE FOR PHYSICS MOVEMENTS
@@ -46,7 +47,7 @@ public class InputManager : MonoBehaviour
     //UPDATE FOR WEAPON/ACTIONS HANDLING
     private void Update()
     {
-        if(onFootActions.FiringMain.ReadValue<float>() == 1)
+        if(onFootActions.FiringMain.ReadValue<float>() == 1) //as long as the player is pressing the fire key, the player will fire (automatic)
         {
             gunManager.Fire();
         }

@@ -39,6 +39,11 @@ public class GunManager : MonoBehaviour
         curGun.GetComponent<WeaponController>().Fire();
     }
 
+    public void Reload()
+    {
+        StartCoroutine(curGun.GetComponent<WeaponController>().Reload());
+    }
+
     //method that aims down sight for the player
     public void AimDownSight(bool status)
     {
