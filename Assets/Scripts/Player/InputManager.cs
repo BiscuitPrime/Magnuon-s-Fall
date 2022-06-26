@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
         onFootActions.Running.canceled += ctx => playerMovementManager.Run(false); //when the player releases the shift button, we reduce speed !!! Since it's a ctx, it's called ONCE (when the player releases shift)
         gunManager = GetComponent<GunManager>();
         onFootActions.ADS.started += ctx => gunManager.AimDownSight(true);
-        onFootActions.ADS.canceled += ctx => gunManager.AimDownSight(true);
+        onFootActions.ADS.canceled += ctx => gunManager.AimDownSight(false);
     }
 
     // FIXEDUPDATE FOR PHYSICS MOVEMENTS

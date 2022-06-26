@@ -28,7 +28,7 @@ public class GunManager : MonoBehaviour
     {
         curGun = Instantiate(gun);
         curGun.transform.position = holder.transform.position;
-        curGun.transform.parent = cam.transform;
+        curGun.transform.parent = holder.transform;
     }
 
     //The firing method, called by InputManager
@@ -40,6 +40,15 @@ public class GunManager : MonoBehaviour
     //method that aims down sight for the player
     public void AimDownSight(bool status)
     {
-
+        if(status)
+        {
+            Debug.Log("Aiming Down Sights !");
+            gameObject.GetComponentInChildren<Animator>().SetBool("isADS", true);
+        }
+        else
+        {
+            Debug.Log("Not aiming !");
+            gameObject.GetComponentInChildren<Animator>().SetBool("isADS", false);
+        }
     }
 }
