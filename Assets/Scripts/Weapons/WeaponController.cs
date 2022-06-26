@@ -27,6 +27,7 @@ public class WeaponController : MonoBehaviour
             new_bullet.transform.position = muzzle.transform.position;
             new_bullet.transform.rotation = muzzle.transform.rotation;
             new_bullet.GetComponent<Rigidbody>().AddForce(new_bullet.transform.forward * 100 * 30f);
+            new_bullet.GetComponent<BulletController>().dmg = 3f;
             StartCoroutine(new_bullet.GetComponent<BulletController>().Life());
             Debug.Log("Firing !");
             isFiring = true;

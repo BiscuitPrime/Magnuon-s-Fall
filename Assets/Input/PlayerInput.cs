@@ -71,6 +71,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ADS"",
+                    ""type"": ""Button"",
+                    ""id"": ""1589c478-de2c-4871-a43e-4857447c0450"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""FiringMain"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7927b2e9-ff87-49f3-a1f5-175966ed6f78"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ADS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Running = m_OnFoot.FindAction("Running", throwIfNotFound: true);
         m_OnFoot_FiringMain = m_OnFoot.FindAction("FiringMain", throwIfNotFound: true);
+        m_OnFoot_ADS = m_OnFoot.FindAction("ADS", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +270,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Look;
     private readonly InputAction m_OnFoot_Running;
     private readonly InputAction m_OnFoot_FiringMain;
+    private readonly InputAction m_OnFoot_ADS;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -258,6 +280,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
         public InputAction @Running => m_Wrapper.m_OnFoot_Running;
         public InputAction @FiringMain => m_Wrapper.m_OnFoot_FiringMain;
+        public InputAction @ADS => m_Wrapper.m_OnFoot_ADS;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -282,6 +305,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @FiringMain.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnFiringMain;
                 @FiringMain.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnFiringMain;
                 @FiringMain.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnFiringMain;
+                @ADS.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnADS;
+                @ADS.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnADS;
+                @ADS.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnADS;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -301,6 +327,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @FiringMain.started += instance.OnFiringMain;
                 @FiringMain.performed += instance.OnFiringMain;
                 @FiringMain.canceled += instance.OnFiringMain;
+                @ADS.started += instance.OnADS;
+                @ADS.performed += instance.OnADS;
+                @ADS.canceled += instance.OnADS;
             }
         }
     }
@@ -312,5 +341,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnRunning(InputAction.CallbackContext context);
         void OnFiringMain(InputAction.CallbackContext context);
+        void OnADS(InputAction.CallbackContext context);
     }
 }

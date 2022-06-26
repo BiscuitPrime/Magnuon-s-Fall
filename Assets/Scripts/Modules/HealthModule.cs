@@ -24,6 +24,7 @@ public class HealthModule : MonoBehaviour
         if (curHP <= 0)
         {
             //Should trigger actor/entity's death
+            Destroy(gameObject);
         }
     }
 }

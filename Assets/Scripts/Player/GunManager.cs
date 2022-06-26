@@ -23,6 +23,7 @@ public class GunManager : MonoBehaviour
         curGun.transform.position = holder.transform.position;
     }
 
+    //method that changes the player's gun
     public void changeGun(GameObject gun)
     {
         curGun = Instantiate(gun);
@@ -34,5 +35,11 @@ public class GunManager : MonoBehaviour
     public void Fire()
     {
         curGun.GetComponent<WeaponController>().Fire();
+    }
+
+    //method that aims down sight for the player
+    public void AimDownSight(bool status)
+    {
+
     }
 }

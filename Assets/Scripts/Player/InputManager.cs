@@ -24,10 +24,11 @@ public class InputManager : MonoBehaviour
         playerMovementManager = GetComponent<PlayerMovementManager>();
         onFootActions.Jump.performed += ctx => playerMovementManager.Jump(); //everytime the jump input is performed, we call the jump() function throught a callback context
         playerLookManager = GetComponent<PlayerLookManager>();
-        onFootActions.Running.started += ctx => playerMovementManager.Run(true);
-        onFootActions.Running.canceled += ctx => playerMovementManager.Run(false);
+        onFootActions.Running.started += ctx => playerMovementManager.Run(true); //When the player starts running (shift is pressed), we augment the speed !!! Since it's a ctx, it's called ONCE (when the player starts pressing shift)
+        onFootActions.Running.canceled += ctx => playerMovementManager.Run(false); //when the player releases the shift button, we reduce speed !!! Since it's a ctx, it's called ONCE (when the player releases shift)
         gunManager = GetComponent<GunManager>();
-        //onFootActions.FiringMain.performed += ctx => gunManager.Fire();
+        onFootActions.ADS.started += ctx => gunManager.AimDownSight(true);
+        onFootActions.ADS.canceled += ctx => gunManager.AimDownSight(true);
     }
 
     // FIXEDUPDATE FOR PHYSICS MOVEMENTS
