@@ -15,10 +15,12 @@ public class PlayerMovementManager : MonoBehaviour
     [SerializeField] private float gravity = -9.8f; //REWORK GRAVITY INTO AN 'ACTOR' component
     private bool isGrounded;
     [SerializeField] private float jumpHeight = 3f;
+    private GunManager actorGunManager;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        actorGunManager = gameObject.GetComponent<GunManager>();
         curSpeed = baseSpeed;
     }
 
@@ -54,8 +56,13 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void Run(bool isRunning)
     {
-        if (isRunning) { curSpeed = sprintSpeed; }
-        else { curSpeed = baseSpeed; }
+        if (isRunning) {
+            actorGunManager.getHolder().GetComponent<Animator>().SetBool("isADS", false);
+            curSpeed = sprintSpeed; 
+        }
+        else {
+            curSpeed = baseSpeed; 
+        }
         
     }
 }

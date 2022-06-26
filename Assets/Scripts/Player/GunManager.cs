@@ -10,7 +10,9 @@ public class GunManager : MonoBehaviour
     #region VARIABLES
     public GameObject curGun;
     [SerializeField] private GameObject holder;
+    public GameObject getHolder() { return holder; }
     [SerializeField] private Camera cam;
+    public bool actorIsRunning; //boolean setup by the parent actor that will inform gunmanager wether or not player can ADS (if he run -> no)
     #endregion
 
     private void Awake()
@@ -40,15 +42,15 @@ public class GunManager : MonoBehaviour
     //method that aims down sight for the player
     public void AimDownSight(bool status)
     {
-        if(status)
+        if(status && !actorIsRunning)
         {
             Debug.Log("Aiming Down Sights !");
-            gameObject.GetComponentInChildren<Animator>().SetBool("isADS", true);
+            holder.GetComponent<Animator>().SetBool("isADS", true); //the gunholder is the one possessing the animator
         }
-        else
+        else if(!status)
         {
             Debug.Log("Not aiming !");
-            gameObject.GetComponentInChildren<Animator>().SetBool("isADS", false);
+            holder.GetComponent<Animator>().SetBool("isADS", false);
         }
     }
 }
