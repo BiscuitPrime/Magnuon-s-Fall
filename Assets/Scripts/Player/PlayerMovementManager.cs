@@ -7,15 +7,17 @@ using UnityEngine;
  */
 public class PlayerMovementManager : MonoBehaviour
 {
+    #region VARIABLES
     private CharacterController controller;
     private Vector3 velocity;
     [SerializeField] private float baseSpeed = 5f;
     [SerializeField] private float sprintSpeed = 10f;
     private float curSpeed;
-    [SerializeField] private float gravity = -9.8f; //REWORK GRAVITY INTO AN 'ACTOR' component
+    [SerializeField] private float gravity = -9.8f; //REWORK GRAVITY INTO AN 'ACTOR'-handled component
     private bool isGrounded;
     [SerializeField] private float jumpHeight = 3f;
     private GunManager actorGunManager;
+    #endregion
 
     private void Awake()
     {
@@ -54,10 +56,11 @@ public class PlayerMovementManager : MonoBehaviour
 
     }
 
+    //function that will handle the run -> should be reworked into a command pattern
     public void Run(bool isRunning)
     {
         if (isRunning) {
-            actorGunManager.getHolder().GetComponent<Animator>().SetBool("isADS", false);
+            actorGunManager.getHolder().GetComponent<Animator>().SetBool("isADS", false); //when the player is running, he will automatically stop ADS
             curSpeed = sprintSpeed; 
         }
         else {

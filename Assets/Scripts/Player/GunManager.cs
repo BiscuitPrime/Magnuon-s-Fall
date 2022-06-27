@@ -4,6 +4,7 @@ using UnityEngine;
 
 /**
  *      Class used by actors to handle the gun they are currently holding
+ *      Component used by actors.
  */
 public class GunManager : MonoBehaviour
 {

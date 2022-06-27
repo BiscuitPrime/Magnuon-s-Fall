@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7753873464361798867}
-  - component: {fileID: 7339351295590545098}
+  - component: {fileID: 1221803590477418503}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7339351295590545098
+--- !u!114 &1221803590477418503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,14 +74,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5973058275013514991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3a7c86acd2ac44eac2377b64fc0b82, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c90714edfeb76c42b16f8f4f3a5ac9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 5938038035848973935, guid: 1f43a8c4e94de83408bdb347bdfba73f, type: 3}
   muzzle: {fileID: 25006939356926879}
   maxAmmo: 10
   reloadTime: 2
   fireRate: 1
+  damage: 3
+  range: 100
+  IS_PROJECTILE: 0
+  bullet: {fileID: 5938038035848973935, guid: 1f43a8c4e94de83408bdb347bdfba73f, type: 3}
 --- !u!1001 &1248357373071916154
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -27,8 +27,8 @@ public class InputManager : MonoBehaviour
         onFootActions.Running.started += ctx => playerMovementManager.Run(true); //When the player starts running (shift is pressed), we augment the speed !!! Since it's a ctx, it's called ONCE (when the player starts pressing shift)
         onFootActions.Running.canceled += ctx => playerMovementManager.Run(false); //when the player releases the shift button, we reduce speed !!! Since it's a ctx, it's called ONCE (when the player releases shift)
         gunManager = GetComponent<GunManager>();
-        onFootActions.ADS.started += ctx => gunManager.AimDownSight(true);
-        onFootActions.ADS.canceled += ctx => gunManager.AimDownSight(false);
+        onFootActions.ADS.started += ctx => gunManager.AimDownSight(true); //when the player starts pressing MOUSE RIGHT, he aims down sights
+        onFootActions.ADS.canceled += ctx => gunManager.AimDownSight(false); //when the player releases MOUSE RIGHT, he stops aiming down sights
         onFootActions.Reloading.performed += ctx => gunManager.Reload();
     }
 
