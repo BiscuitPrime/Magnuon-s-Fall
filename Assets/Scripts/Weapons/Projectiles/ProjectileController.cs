@@ -5,7 +5,7 @@ using UnityEngine;
 /**
  *  Class used by physical bullets/projectiles.
  */
-public class BulletController : MonoBehaviour
+public class ProjectileController : MonoBehaviour
 {
     public float dmg;
 
