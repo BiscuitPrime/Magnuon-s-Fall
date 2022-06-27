@@ -70,6 +70,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    //method that artificially "slows" down the automatic fire, to not have immediate 36 pellet worth of shots
     private IEnumerator firingRate()
     {
         yield return new WaitForSeconds(fireRate/10);

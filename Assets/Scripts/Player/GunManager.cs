@@ -13,7 +13,7 @@ public class GunManager : MonoBehaviour
     [SerializeField] private GameObject holder;
     public GameObject getHolder() { return holder; }
     [SerializeField] private Camera cam;
-    public bool actorIsRunning; //boolean setup by the parent actor that will inform gunmanager wether or not player can ADS (if he run -> no)
+    public bool actorIsRunning=false; //boolean setup by the parent actor that will inform gunmanager wether or not player can ADS (if he run -> no)
     #endregion
 
     private void Awake()

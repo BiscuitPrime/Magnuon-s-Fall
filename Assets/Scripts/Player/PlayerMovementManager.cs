@@ -16,7 +16,7 @@ public class PlayerMovementManager : MonoBehaviour
     [SerializeField] private float gravity = -9.8f; //REWORK GRAVITY INTO AN 'ACTOR'-handled component
     private bool isGrounded;
     [SerializeField] private float jumpHeight = 3f;
-    private GunManager actorGunManager;
+    private GunManager actorGunManager; //used to tell gun manager that player is running
     #endregion
 
     private void Awake()
@@ -61,9 +61,11 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (isRunning) {
             actorGunManager.getHolder().GetComponent<Animator>().SetBool("isADS", false); //when the player is running, he will automatically stop ADS
+            actorGunManager.actorIsRunning = true;
             curSpeed = sprintSpeed; 
         }
         else {
+            actorGunManager.actorIsRunning = false;
             curSpeed = baseSpeed; 
         }
         
