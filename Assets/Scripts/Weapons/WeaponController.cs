@@ -11,7 +11,7 @@ public class WeaponController : MonoBehaviour
     #region VARIABLES
     [SerializeField] private GameObject muzzle;
     [SerializeField] private int maxAmmo=10;
-    private int curAmmo;
+    public int curAmmo;
     [SerializeField] private float reloadTime = 2f;
     [SerializeField] private float fireRate=10f;
     [SerializeField] private float damage = 3f;
@@ -20,6 +20,7 @@ public class WeaponController : MonoBehaviour
     private bool isReloading;
     [SerializeField] private bool IS_PROJECTILE = false;
     [SerializeField] private GameObject bullet;
+    private UIManager uiManager;
     #endregion
 
     private void Awake()
@@ -27,6 +28,7 @@ public class WeaponController : MonoBehaviour
         isFiring = false;
         isReloading = false;
         curAmmo = maxAmmo;
+        uiManager.updateAmmoCounter(curAmmo);
     }
 
     //fire method, called by GunManager
@@ -35,6 +37,7 @@ public class WeaponController : MonoBehaviour
         if (!isFiring && !isReloading && curAmmo>0)  //as long as the gun isn't already firing AND it has ammo, we shoot a new bullet :
         {
             curAmmo --;
+            uiManager.updateAmmoCounter(curAmmo);
             if(!IS_PROJECTILE)
             {
                 //Raycast version :
@@ -86,5 +89,16 @@ public class WeaponController : MonoBehaviour
         curAmmo = maxAmmo;
         isReloading = false;
         yield return new WaitForEndOfFrame();
+        uiManager.updateAmmoCounter(curAmmo);
+    }
+
+    public int getMaxAmmo()
+    {
+        return maxAmmo;
+    }
+
+    public void setUiManager(UIManager ui)
+    {
+        uiManager = ui;
     }
 }
