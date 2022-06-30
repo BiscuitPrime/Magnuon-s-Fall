@@ -30,6 +30,7 @@ public class InputManager : MonoBehaviour
         onFootActions.ADS.started += ctx => gunManager.AimDownSight(true); //when the player starts pressing MOUSE RIGHT, he aims down sights
         onFootActions.ADS.canceled += ctx => gunManager.AimDownSight(false); //when the player releases MOUSE RIGHT, he stops aiming down sights
         onFootActions.Reloading.performed += ctx => gunManager.Reload();
+        onFootActions.Interact.performed += ctx => playerLookManager.Interact(); //the interact elemnt is contained in the Look manager, to directly connect to the cam
     }
 
     // FIXEDUPDATE FOR PHYSICS MOVEMENTS

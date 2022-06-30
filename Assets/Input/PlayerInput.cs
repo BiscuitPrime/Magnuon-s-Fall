@@ -89,6 +89,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""95573264-3113-4dd0-89cf-7ec6694109b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -210,6 +219,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reloading"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c67e28fe-29df-4219-8963-9a6b467c6de3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -743,6 +763,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_FiringMain = m_OnFoot.FindAction("FiringMain", throwIfNotFound: true);
         m_OnFoot_ADS = m_OnFoot.FindAction("ADS", throwIfNotFound: true);
         m_OnFoot_Reloading = m_OnFoot.FindAction("Reloading", throwIfNotFound: true);
+        m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -821,6 +842,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_FiringMain;
     private readonly InputAction m_OnFoot_ADS;
     private readonly InputAction m_OnFoot_Reloading;
+    private readonly InputAction m_OnFoot_Interact;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -832,6 +854,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @FiringMain => m_Wrapper.m_OnFoot_FiringMain;
         public InputAction @ADS => m_Wrapper.m_OnFoot_ADS;
         public InputAction @Reloading => m_Wrapper.m_OnFoot_Reloading;
+        public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -862,6 +885,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Reloading.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReloading;
                 @Reloading.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReloading;
                 @Reloading.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnReloading;
+                @Interact.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -887,6 +913,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Reloading.started += instance.OnReloading;
                 @Reloading.performed += instance.OnReloading;
                 @Reloading.canceled += instance.OnReloading;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -1005,6 +1034,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnFiringMain(InputAction.CallbackContext context);
         void OnADS(InputAction.CallbackContext context);
         void OnReloading(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
