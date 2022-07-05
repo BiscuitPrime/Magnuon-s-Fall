@@ -9,7 +9,10 @@ using UnityEngine;
 public class GunManager : MonoBehaviour
 {
     #region VARIABLES
-    public GameObject curGun;
+    [HideInInspector]public GameObject curGun=null;
+    int slotIndicator=1; //indicates the current slot being used
+    [SerializeField] private GameObject slot1;
+    [SerializeField] private GameObject slot2;
     private WeaponController curWeaponController;
     [SerializeField] private GameObject holder;
     [SerializeField] private Camera cam;
@@ -20,7 +23,16 @@ public class GunManager : MonoBehaviour
     private void Awake()
     {
         uiManager = GetComponent<UIManager>();
-        changeGun(curGun);
+        slot1 = Instantiate(slot1);
+        slot1.transform.position = holder.transform.position;
+        slot1.transform.parent = holder.transform;
+        slot1.SetActive(false);
+        slot2 = Instantiate(slot2);
+        slot2.transform.position = holder.transform.position;
+        slot2.transform.parent = holder.transform;
+        slot2.SetActive(false);
+        curGun = slot1;
+        changeGun(1);
     }
 
     public GameObject getHolder() { return holder; }
@@ -31,9 +43,20 @@ public class GunManager : MonoBehaviour
     }
 
     //method that changes the player's gun
-    public void changeGun(GameObject gun)
+    public void changeGun(int slot)
     {
-        curGun = Instantiate(gun);
+        curGun.SetActive(false);
+        if(slot == 1)
+        {
+            curGun = slot1;
+            slotIndicator = 1;
+        }
+        else
+        {
+            curGun = slot2;
+            slotIndicator = 2;
+        }
+        curGun.SetActive(true);
         curGun.transform.position = holder.transform.position;
         curGun.transform.parent = holder.transform;
         if(curGun.GetComponent<WeaponController>() != null)
@@ -72,6 +95,27 @@ public class GunManager : MonoBehaviour
             Debug.Log("Not aiming !");
             holder.GetComponent<Animator>().SetBool("isADS", false);
             StartCoroutine(uiManager.displayCrosshairs(false));
+        }
+    }
+
+    public void Equip(int equipSlot)
+    {
+        changeGun(equipSlot);
+    }
+
+    public void addGun(GameObject gun)
+    {
+        if(slotIndicator==1)
+        {
+            slot1 = Instantiate(gun);
+            slot1.SetActive(false);
+            changeGun(1);
+        }
+        else
+        {
+            slot2 = Instantiate(gun);
+            slot2.SetActive(false);
+            changeGun(2);
         }
     }
 }

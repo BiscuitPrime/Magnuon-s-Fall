@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour
     private PlayerMovementManager playerMovementManager;
     private PlayerLookManager playerLookManager;
     private GunManager gunManager;
+    //private InventoryModuleController inventory;
     #endregion
 
     void Awake()
@@ -31,6 +32,9 @@ public class InputManager : MonoBehaviour
         onFootActions.ADS.canceled += ctx => gunManager.AimDownSight(false); //when the player releases MOUSE RIGHT, he stops aiming down sights
         onFootActions.Reloading.performed += ctx => gunManager.Reload();
         onFootActions.Interact.performed += ctx => playerLookManager.Interact(); //the interact elemnt is contained in the Look manager, to directly connect to the cam
+        //inventory = GetComponent<InventoryModuleController>();
+        onFootActions.Item1.performed += ctx => gunManager.Equip(1);
+        onFootActions.Item2.performed += ctx => gunManager.Equip(2);
     }
 
     // FIXEDUPDATE FOR PHYSICS MOVEMENTS

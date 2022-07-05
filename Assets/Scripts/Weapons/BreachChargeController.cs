@@ -15,7 +15,7 @@ public class BreachChargeController : WeaponController
     public override void Fire()
     {
         GunManager gunManager = gameObject.transform.parent.parent.parent.GetComponent<GunManager>();
-        gunManager.changeGun(detonator);
+        gunManager.addGun(detonator);
         gunManager.curGun.GetComponent<DetonatorController>().setDetonationTarget(gameObject); //we tell the detonator to target the charge
         gameObject.transform.parent = null;
         Debug.Log("Placed charge !");

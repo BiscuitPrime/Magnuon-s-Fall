@@ -98,6 +98,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0b19a6fb-f7ac-44d4-b8cc-0a7a13e1b68f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item2"",
+                    ""type"": ""Button"",
+                    ""id"": ""79cfe367-633a-4b7f-824a-3203ecc9c357"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -230,6 +248,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e927b75-3492-4726-b009-dd3b98029f11"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f540b20-d787-4dbb-99ac-1a19fff3b54c"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Item2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -764,6 +804,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_ADS = m_OnFoot.FindAction("ADS", throwIfNotFound: true);
         m_OnFoot_Reloading = m_OnFoot.FindAction("Reloading", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
+        m_OnFoot_Item1 = m_OnFoot.FindAction("Item1", throwIfNotFound: true);
+        m_OnFoot_Item2 = m_OnFoot.FindAction("Item2", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -843,6 +885,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_ADS;
     private readonly InputAction m_OnFoot_Reloading;
     private readonly InputAction m_OnFoot_Interact;
+    private readonly InputAction m_OnFoot_Item1;
+    private readonly InputAction m_OnFoot_Item2;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -855,6 +899,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @ADS => m_Wrapper.m_OnFoot_ADS;
         public InputAction @Reloading => m_Wrapper.m_OnFoot_Reloading;
         public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
+        public InputAction @Item1 => m_Wrapper.m_OnFoot_Item1;
+        public InputAction @Item2 => m_Wrapper.m_OnFoot_Item2;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -888,6 +934,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnInteract;
+                @Item1.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnItem1;
+                @Item1.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnItem1;
+                @Item1.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnItem1;
+                @Item2.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnItem2;
+                @Item2.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnItem2;
+                @Item2.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnItem2;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -916,6 +968,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Item1.started += instance.OnItem1;
+                @Item1.performed += instance.OnItem1;
+                @Item1.canceled += instance.OnItem1;
+                @Item2.started += instance.OnItem2;
+                @Item2.performed += instance.OnItem2;
+                @Item2.canceled += instance.OnItem2;
             }
         }
     }
@@ -1035,6 +1093,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnADS(InputAction.CallbackContext context);
         void OnReloading(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnItem1(InputAction.CallbackContext context);
+        void OnItem2(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

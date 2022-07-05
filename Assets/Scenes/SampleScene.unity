@@ -398,9 +398,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6327479756345317484, guid: 359c88aa3dc12464c949a1e1c7cbe1b6, type: 3}
+      propertyPath: slot1
+      value: 
+      objectReference: {fileID: 5973058275013514991, guid: dee8cf8c6e9234b45803b600519428e8, type: 3}
+    - target: {fileID: 6327479756345317484, guid: 359c88aa3dc12464c949a1e1c7cbe1b6, type: 3}
+      propertyPath: slot2
+      value: 
+      objectReference: {fileID: 5633227839641374623, guid: b8b560267c23d5a4d8f40d054e0e3be4, type: 3}
+    - target: {fileID: 6327479756345317484, guid: 359c88aa3dc12464c949a1e1c7cbe1b6, type: 3}
       propertyPath: curGun
       value: 
-      objectReference: {fileID: 7660424773329235121, guid: 52e0c041ec71e8b42bb16fe9f12d0f33, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7731075496311065506, guid: 359c88aa3dc12464c949a1e1c7cbe1b6, type: 3}
       propertyPath: m_RootOrder
       value: 11
