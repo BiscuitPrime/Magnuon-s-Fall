@@ -10,6 +10,7 @@ public class GunManager : MonoBehaviour
 {
     #region VARIABLES
     public GameObject curGun;
+    private WeaponController curWeaponController;
     [SerializeField] private GameObject holder;
     [SerializeField] private Camera cam;
     public bool actorIsRunning=false; //boolean setup by the parent actor that will inform gunmanager wether or not player can ADS (if he run -> no)
@@ -35,19 +36,26 @@ public class GunManager : MonoBehaviour
         curGun = Instantiate(gun);
         curGun.transform.position = holder.transform.position;
         curGun.transform.parent = holder.transform;
-        curGun.GetComponent<WeaponController>().setUiManager(uiManager); //to the newly-introduced gun, we give the UIManager
-        uiManager.setMaxAmmo(curGun.GetComponent<WeaponController>().getMaxAmmo());
+        if(curGun.GetComponent<WeaponController>() != null)
+        {
+            curWeaponController = curGun.GetComponent<WeaponController>();
+        }
+        curWeaponController.setUiManager(uiManager); //to the newly-introduced gun, we give the UIManager
+        uiManager.setMaxAmmo(curWeaponController.getMaxAmmo());
     }
 
     //The firing method, called by InputManager
     public void Fire()
     {
-        curGun.GetComponent<WeaponController>().Fire();
+        if (curGun.GetComponent<WeaponController>())
+        {
+            curWeaponController.Fire();
+        }
     }
 
     public void Reload()
     {
-        StartCoroutine(curGun.GetComponent<WeaponController>().Reload());
+        StartCoroutine(curWeaponController.Reload());
     }
 
     //method that aims down sight for the player

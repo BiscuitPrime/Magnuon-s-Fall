@@ -4,10 +4,11 @@ using UnityEngine;
 
 /**
  *  Class used by physical bullets/projectiles.
+ *  This script is held by the projectiles themselves
  */
 public class ProjectileController : MonoBehaviour
 {
-    public float dmg;
+    private float dmg;
 
     public IEnumerator Life()
     {
@@ -15,7 +16,7 @@ public class ProjectileController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //method handling the collision : it will collide with any actor and inflict d
+    //method handling the collision : it will collide with any actor and inflict damage
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag=="Actors" && collision.gameObject.GetComponent<HealthModule>())
@@ -24,6 +25,7 @@ public class ProjectileController : MonoBehaviour
         }
     }
 
+    //the bullet damage is set up by its parent weapon, since the projectile sccript can be applied to various different projectiles 
     public void setDamage(float damage)
     {
         dmg = damage;

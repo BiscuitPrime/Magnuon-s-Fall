@@ -17,7 +17,7 @@ public class HealthModule : MonoBehaviour
         curHP = maxHP;
     }
 
-    //Damage function, called when actor/entity is hit
+    //Damage function, called when actor/entity is hit by the object hitting it
     public void Damage(float dmg)
     {
         curHP -= dmg;

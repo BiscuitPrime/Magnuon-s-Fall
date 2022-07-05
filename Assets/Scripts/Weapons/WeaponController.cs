@@ -16,11 +16,11 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private float fireRate=10f;
     [SerializeField] private float damage = 3f;
     [SerializeField] private float range = 100f;
-    private bool isFiring; //REWORK INTO STATES
+    protected bool isFiring; //REWORK INTO STATES
     private bool isReloading;
     [SerializeField] private bool IS_PROJECTILE = false;
     [SerializeField] private GameObject bullet;
-    private UIManager uiManager;
+    protected UIManager uiManager;
     #endregion
 
     private void Awake()
@@ -28,11 +28,10 @@ public class WeaponController : MonoBehaviour
         isFiring = false;
         isReloading = false;
         curAmmo = maxAmmo;
-        uiManager.updateAmmoCounter(curAmmo);
     }
 
     //fire method, called by GunManager
-    public void Fire()
+    public virtual void Fire()
     {
         if (!isFiring && !isReloading && curAmmo>0)  //as long as the gun isn't already firing AND it has ammo, we shoot a new bullet :
         {
@@ -81,7 +80,7 @@ public class WeaponController : MonoBehaviour
     }
 
     //reload method, called by GunManager
-    public IEnumerator Reload()
+    public virtual IEnumerator Reload()
     {
         Debug.Log("Reloading !");
         yield return new WaitForSeconds(reloadTime);
@@ -100,5 +99,6 @@ public class WeaponController : MonoBehaviour
     public void setUiManager(UIManager ui)
     {
         uiManager = ui;
+        uiManager.updateAmmoCounter(curAmmo);
     }
 }
