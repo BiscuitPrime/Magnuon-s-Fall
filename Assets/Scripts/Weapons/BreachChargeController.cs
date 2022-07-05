@@ -4,6 +4,7 @@ using UnityEngine;
 
 /**
  *  Class used for the Breach Charge, a placeable explosive charge
+ *  Component of the Breach Charge prefab
  */
 public class BreachChargeController : WeaponController
 {
@@ -19,7 +20,7 @@ public class BreachChargeController : WeaponController
         gameObject.transform.parent = null;
         Debug.Log("Placed charge !");
         isFiring = true;
-        StartCoroutine(activateChargeTimer());
+        StartCoroutine(activateChargeTimer()); //the charge is not active immediately
     }
 
     private IEnumerator activateChargeTimer()
@@ -32,13 +33,12 @@ public class BreachChargeController : WeaponController
     //called by the detonator's Fire() function
     public void detonate()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3f); //the charge looks for colliders in its vicinity
         foreach (var hitCollider in hitColliders)
         {
-            Debug.Log("target hit :" + hitCollider.transform.name);
             if(hitCollider.transform.tag=="BreakableObject")
             {
-                hitCollider.transform.GetComponent<HealthModule>().Damage(100f);
+                hitCollider.transform.GetComponent<HealthModule>().Damage(100f); //we make sure the wall dies
             }
         }
         Destroy(gameObject);

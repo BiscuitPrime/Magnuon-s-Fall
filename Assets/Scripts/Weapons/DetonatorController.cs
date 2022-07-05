@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ *  Class used by the Detonator prefab, that detonates a detonationTarget
+ *  The detonator is created by the associated charge when placed and is useless afterwards
+ */
 public class DetonatorController : WeaponController
 {
     private GameObject detonationTarget; //the target of the detonator
@@ -11,10 +15,10 @@ public class DetonatorController : WeaponController
         detonationTarget = target;
     }
 
-    //when fire is called, the detonator detonates its target
+    //when fire is called, the detonator detonates its target if the target is active
     public override void Fire()
     {
-        if(detonationTarget == null)
+        if(detonationTarget == null) //if no target available, the detonator just doesn't work
         {
             dud();
         }
